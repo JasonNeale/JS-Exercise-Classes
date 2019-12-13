@@ -160,6 +160,13 @@ class Instructor extends Lambdasian{
         return `${studentObj.name} receives a perfect score on ${subject}`;
     }
 
+    gradeStudent(studentObj) {
+        let min = Math.ceil(1);
+        let max = Math.floor(100);
+
+        let newGrade = Math.floor(Math.random() * (max - min + 1)) + min;
+        studentObj.grade = newGrade;
+    }
 }
 
 /*
@@ -198,13 +205,14 @@ class Student extends Lambdasian {
         return `${this.name} has begun sprint challenge on ${subject}`;
     }
 
-    graduate() {
+    graduate(grader) {
+        grader.gradeStudent(this);
         
         while (this.grade < 70) {
-            
+            grader.gradeStudent(this);
         }
 
-        //graduate!
+        return `Congrats ${this.name}! After many random attempts, you graduated with a ${this.grade}%!`;
     }
 }
 
